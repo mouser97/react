@@ -11,7 +11,7 @@ class App extends Component {
           <h1 className="App-title"></h1>
         </header>
         <p className="App-intro">
-          Whats poppin
+          Whats poppin youtube
         </p>
       </div>
     );
