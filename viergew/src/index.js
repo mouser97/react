@@ -4,7 +4,7 @@ import './index.css';
 
 function Square(props) {
     return (
-      <button className="square">
+      <button className={props.color[props.nummer]}>
         {props.value}
       </button>
     );
@@ -21,7 +21,8 @@ class Main extends React.Component {
         super(props);
         this.state = {
             squares: Array(81).fill(null),
-            xIsNext: true
+            xIsNext: true,
+            color: Array(81).fill("squares_white")
         };
     }
 
@@ -35,10 +36,13 @@ class Main extends React.Component {
                 return;
             }
         }
-        squares[i] = this.state.xIsNext ? "X" : "O";
+        squares[i] = true;
+        var color = this.state.color;
+        color[i] = this.state.xIsNext ? "squares_red" : "squares_yellow";
         this.setState({
             squares : squares,
-            xIsNext: !this.state.xIsNext
+            xIsNext: !this.state.xIsNext,
+            color: color
         });
     }
     
@@ -49,6 +53,7 @@ class Main extends React.Component {
                     <Board 
                         squares={this.state.squares}
                         onClick={i => this.handleClick(i)}
+                        color={this.state.color}
                     />
                 </div>
             </div>
@@ -61,6 +66,8 @@ class Board extends React.Component {
       return (
         <Square
             value={this.props.squares[i]}
+            color={this.props.color}
+            nummer={i}
         />
       );
     }
