@@ -4,7 +4,7 @@ import './index.css';
 
 function Square(props) {
     return (
-      <button className={props.color[props.nummer]} />
+      <label className={props.color[props.nummer]} />
     );
 }
 
@@ -20,7 +20,8 @@ class Main extends React.Component {
         this.state = {
             squares: Array(42).fill(null),
             xIsNext: true,
-            color: Array(42).fill("squares_white")
+            color: Array(42).fill("squares_white"),
+            player: "rot"
         };
     }
 
@@ -37,10 +38,12 @@ class Main extends React.Component {
         squares[i] = true;
         var color = this.state.color;
         color[i] = this.state.xIsNext ? "squares_red" : "squares_yellow";
+        var player = this.state.xIsNext ? "gelb" : "rot";
         this.setState({
             squares : squares,
             xIsNext: !this.state.xIsNext,
-            color: color
+            color: color,
+            player: player
         });
     }
     
@@ -53,6 +56,9 @@ class Main extends React.Component {
                         onClick={i => this.handleClick(i)}
                         color={this.state.color}
                     />
+                </div>
+                <div className="info">
+                    <h1> Spieler {this.state.player} an der Reihe!</h1>
                 </div>
             </div>
         );
